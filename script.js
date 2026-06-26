@@ -1,103 +1,158 @@
 const form = document.getElementById("contact-form");
-const copyButton = document.getElementById("copy-inquiry");
 const statusNode = document.getElementById("form-status");
+const copyButton = document.getElementById("copy-inquiry");
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-function escapeValue(value) {
-  return (value || "").trim();
+function valueOf(formData, key) {
+  return String(formData.get(key) || "").trim();
 }
 
-function buildInquiry(formData) {
-  const company = escapeValue(formData.get("company"));
-  const name = escapeValue(formData.get("name"));
-  const email = escapeValue(formData.get("email"));
-  const phone = escapeValue(formData.get("phone"));
-  const plan = escapeValue(formData.get("plan")) || "未定";
-  const topic = escapeValue(formData.get("topic")) || "未選択";
-  const message = escapeValue(formData.get("message"));
+function buildInquiryText() {
+  if (!form) return "";
 
-  const subject = `【ITサポート相談】${company || name}`;
-  const lines = [
-    "トリプルウィンマネー 御中",
+  const formData = new FormData(form);
+  return [
+    "トリプルウィンマネー 斉藤 様",
     "",
-    "ホームページの問い合わせフォームより連絡します。",
+    "ITサポートの無料相談について連絡します。",
     "",
-    `会社名 / 店舗名: ${company || "未記入"}`,
-    `ご担当者名: ${name}`,
-    `メールアドレス: ${email}`,
-    `電話番号: ${phone || "未記入"}`,
-    `ご希望のプラン: ${plan}`,
-    `ご相談内容: ${topic}`,
+    `会社名 / 店舗名：${valueOf(formData, "company") || "未入力"}`,
+    `ご担当者名：${valueOf(formData, "name")}`,
+    `メールアドレス：${valueOf(formData, "email")}`,
+    `ご相談内容：${valueOf(formData, "topic") || "未選択"}`,
     "",
-    "ご相談内容の詳細",
-    message,
-    "",
-    `送信元ドメイン: ${form.dataset.domain || ""}`
-  ];
-
-  return {
-    subject,
-    body: lines.join("\n")
-  };
+    "詳細：",
+    valueOf(formData, "message")
+  ].join("\n");
 }
 
-function setStatus(message, isError = false) {
-  statusNode.textContent = message;
-  statusNode.style.color = isError ? "#9b3b2a" : "";
-}
-
-function validateForm() {
-  if (!form.reportValidity()) {
-    setStatus("必須項目を確認してください。", true);
-    return false;
-  }
-
-  const honeypot = form.elements.namedItem("website");
-  if (honeypot && honeypot.value) {
-    setStatus("送信を受け付けできませんでした。", true);
-    return false;
-  }
-
-  return true;
-}
-
-function getMailtoUrl() {
-  const inquiry = buildInquiry(new FormData(form));
-  const params = new URLSearchParams({
-    subject: inquiry.subject,
-    body: inquiry.body
-  });
-
-  return `mailto:${form.dataset.recipient || ""}?${params.toString()}`;
-}
-
-async function copyInquiryToClipboard() {
-  if (!validateForm()) {
+async function copyText(text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    await navigator.clipboard.writeText(text);
     return;
   }
 
-  const inquiry = buildInquiry(new FormData(form));
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  textarea.setAttribute("readonly", "");
+  textarea.style.position = "fixed";
+  textarea.style.opacity = "0";
+  document.body.appendChild(textarea);
+  textarea.select();
+  document.execCommand("copy");
+  textarea.remove();
+}
+
+async function copyInquiry() {
+  if (!form || !statusNode) return;
 
   try {
-    await navigator.clipboard.writeText(`${inquiry.subject}\n\n${inquiry.body}`);
-    setStatus("問い合わせ内容をコピーしました。メール本文に貼り付けてご利用ください。");
+    await copyText(buildInquiryText());
+    statusNode.textContent = "相談内容をコピーしました。メール本文としてご利用ください。";
   } catch (error) {
-    setStatus("コピーに失敗しました。別の方法でお試しください。", true);
+    statusNode.textContent = "コピーできませんでした。入力内容を選択してコピーしてください。";
   }
 }
 
-if (form && copyButton && statusNode) {
+if (form && statusNode) {
   form.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    if (!validateForm()) {
+    if (!form.reportValidity()) {
+      statusNode.textContent = "必須項目を確認してください。";
       return;
     }
 
-    setStatus("メール作成画面を開いています。起動しない場合はコピー機能をご利用ください。");
-    window.location.href = getMailtoUrl();
-  });
-
-  copyButton.addEventListener("click", () => {
-    copyInquiryToClipboard();
+    const recipient = form.dataset.recipient || "shimon.saitou@gmail.com";
+    const subject = encodeURIComponent("ITサポート無料相談");
+    const body = encodeURIComponent(buildInquiryText());
+    window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+    statusNode.textContent = "メール作成画面を開きます。起動しない場合は「内容をコピーする」をご利用ください。";
   });
 }
+
+if (copyButton) {
+  copyButton.addEventListener("click", copyInquiry);
+}
+
+function setupScrollReveal() {
+  const revealGroups = [
+    ".hero-copy",
+    ".representative-card",
+    ".trust-band",
+    ".section-heading",
+    ".split-heading",
+    ".trouble-card",
+    ".section-cta",
+    ".service-card",
+    ".ai-card",
+    ".scope-card",
+    ".price-card",
+    ".comparison-wrap",
+    ".contract-note",
+    ".visit-card",
+    ".flow-list li",
+    ".consult-list",
+    ".case-card",
+    ".security-card",
+    ".profile-card",
+    ".faq-list details",
+    ".contact-layout"
+  ];
+
+  const targets = Array.from(document.querySelectorAll(revealGroups.join(",")));
+  targets.forEach((target, index) => {
+    target.dataset.reveal = target.matches(".representative-card, .visit-card, .security-card, .profile-card, .contact-layout") ? "scale" : "up";
+    target.style.setProperty("--reveal-delay", `${Math.min(index % 4, 3) * 80}ms`);
+  });
+
+  if (reduceMotion) {
+    targets.forEach((target) => target.classList.add("is-visible"));
+    return;
+  }
+
+  document.body.classList.add("reveal-ready");
+
+  if (!("IntersectionObserver" in window)) {
+    targets.forEach((target) => target.classList.add("is-visible"));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("is-visible");
+      observer.unobserve(entry.target);
+    });
+  }, {
+    rootMargin: "0px 0px -12% 0px",
+    threshold: 0.12
+  });
+
+  targets.forEach((target) => observer.observe(target));
+}
+
+function setupScrollProgress() {
+  const header = document.querySelector(".site-header");
+
+  let ticking = false;
+
+  function updateProgress() {
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = maxScroll > 0 ? (window.scrollY / maxScroll) * 100 : 0;
+    document.body.style.setProperty("--scroll-progress", `${Math.min(progress, 100)}%`);
+    if (header) header.classList.toggle("is-scrolled", window.scrollY > 16);
+    ticking = false;
+  }
+
+  window.addEventListener("scroll", () => {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(updateProgress);
+  }, { passive: true });
+
+  updateProgress();
+}
+
+setupScrollReveal();
+setupScrollProgress();

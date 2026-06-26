@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 520" role="img" aria-labelledby="title desc">
+  <title id="title">Support map</title>
+  <desc id="desc">Four support areas connected to one external IT partner.</desc>
+  <rect width="760" height="520" rx="42" fill="#fff"/>
+  <path d="M380 138v244M238 260h284M280 178l200 164M480 178 280 342" stroke="#DADCE0" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="380" cy="260" r="88" fill="#E8F0FE" stroke="#1A73E8" stroke-width="4"/>
+  <text x="380" y="250" text-anchor="middle" fill="#174EA6" font-family="Arial, sans-serif" font-size="23" font-weight="700">外部IT</text>
+  <text x="380" y="282" text-anchor="middle" fill="#174EA6" font-family="Arial, sans-serif" font-size="23" font-weight="700">担当</text>
+  <g font-family="Arial, sans-serif" font-weight="700" font-size="18">
+    <rect x="96" y="78" width="172" height="94" rx="24" fill="#FCE8E6" stroke="#F28B82"/>
+    <text x="182" y="135" text-anchor="middle" fill="#B3261E">PC・スマホ</text>
+    <rect x="492" y="78" width="172" height="94" rx="24" fill="#E6F4EA" stroke="#81C995"/>
+    <text x="578" y="135" text-anchor="middle" fill="#137333">クラウド</text>
+    <rect x="96" y="348" width="172" height="94" rx="24" fill="#FEF7E0" stroke="#FDD663"/>
+    <text x="182" y="405" text-anchor="middle" fill="#B06000">トラブル</text>
+    <rect x="492" y="348" width="172" height="94" rx="24" fill="#E8F0FE" stroke="#8AB4F8"/>
+    <text x="578" y="405" text-anchor="middle" fill="#174EA6">AI活用</text>
+  </g>
+  <circle cx="182" cy="110" r="16" fill="#EA4335"/>
+  <circle cx="578" cy="110" r="16" fill="#34A853"/>
+  <circle cx="182" cy="380" r="16" fill="#FBBC04"/>
+  <circle cx="578" cy="380" r="16" fill="#1A73E8"/>
+</svg>

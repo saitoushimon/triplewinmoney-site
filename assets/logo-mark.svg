@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">TRIPLE WIN MONEY logo mark</title>
+  <desc id="desc">Gold triple arrow mark on a clean white background.</desc>
+  <rect width="512" height="512" rx="112" fill="#fff"/>
+  <circle cx="256" cy="238" r="156" fill="none" stroke="#c8a84a" stroke-width="28"/>
+  <g fill="none" stroke="#c8a84a" stroke-width="34" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M256 356V132"/>
+    <path d="M178 300l78 56 78-56"/>
+    <path d="M256 132l-42 58"/>
+    <path d="M256 132l42 58"/>
+    <path d="M244 270 146 172"/>
+    <path d="M146 172l14 72"/>
+    <path d="M146 172l72 14"/>
+    <path d="M268 270 366 172"/>
+    <path d="M366 172l-72 14"/>
+    <path d="M366 172l-14 72"/>
+  </g>
+  <text x="256" y="438" text-anchor="middle" fill="#0b1630" font-family="Georgia, 'Times New Roman', serif" font-size="34" font-weight="700" letter-spacing="5">TRIPLE WIN</text>
+</svg>

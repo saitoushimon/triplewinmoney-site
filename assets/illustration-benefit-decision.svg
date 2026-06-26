@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 340" role="img" aria-labelledby="title">
+  <title id="title">Faster decisions</title>
+  <rect width="520" height="340" rx="34" fill="#E6F4EA"/>
+  <rect x="74" y="72" width="372" height="210" rx="30" fill="#fff" stroke="#DADCE0" stroke-width="2"/>
+  <path d="M134 138h146M134 184h222M134 230h110" stroke="#5F6368" stroke-width="16" stroke-linecap="round"/>
+  <circle cx="368" cy="132" r="42" fill="#34A853"/>
+  <path d="M348 132l14 14 28-34" stroke="#fff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="388" cy="224" r="28" fill="#FBBC04"/>
+  <path d="M376 224h24" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 480" role="img" aria-labelledby="title">
+  <title id="title">Contact and consultation</title>
+  <rect width="760" height="480" rx="40" fill="#F8FAFF"/>
+  <rect x="82" y="86" width="312" height="252" rx="28" fill="#fff" stroke="#DADCE0" stroke-width="2"/>
+  <path d="M132 150h190M132 206h218M132 262h146" stroke="#5F6368" stroke-width="16" stroke-linecap="round"/>
+  <rect x="132" y="296" width="144" height="44" rx="22" fill="#1A73E8"/>
+  <rect x="432" y="130" width="222" height="84" rx="28" fill="#E8F0FE" stroke="#8AB4F8" stroke-width="2"/>
+  <rect x="432" y="242" width="168" height="84" rx="28" fill="#E6F4EA" stroke="#81C995" stroke-width="2"/>
+  <circle cx="644" cy="256" r="38" fill="#FBBC04"/>
+  <path d="M628 256h32M644 240v32" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
+</svg>

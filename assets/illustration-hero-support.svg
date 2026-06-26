@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 560" role="img" aria-labelledby="title desc">
+  <title id="title">IT support overview</title>
+  <desc id="desc">A clean Google-style dashboard showing PC, cloud, network and AI support connected to a central help desk.</desc>
+  <rect width="760" height="560" rx="44" fill="#F8FAFF"/>
+  <circle cx="638" cy="82" r="74" fill="#E8F0FE"/>
+  <circle cx="88" cy="456" r="58" fill="#E6F4EA"/>
+  <rect x="82" y="88" width="596" height="384" rx="34" fill="#fff" stroke="#DADCE0" stroke-width="2"/>
+  <rect x="118" y="124" width="252" height="172" rx="22" fill="#E8F0FE"/>
+  <rect x="144" y="154" width="200" height="22" rx="11" fill="#1A73E8"/>
+  <rect x="144" y="194" width="160" height="14" rx="7" fill="#8AB4F8"/>
+  <rect x="144" y="226" width="118" height="14" rx="7" fill="#8AB4F8"/>
+  <rect x="416" y="124" width="186" height="82" rx="20" fill="#E6F4EA"/>
+  <path d="M470 164h78" stroke="#34A853" stroke-width="14" stroke-linecap="round"/>
+  <path d="M494 190h30" stroke="#34A853" stroke-width="10" stroke-linecap="round"/>
+  <rect x="416" y="236" width="186" height="82" rx="20" fill="#FEF7E0"/>
+  <path d="M458 276h100" stroke="#FBBC04" stroke-width="14" stroke-linecap="round"/>
+  <path d="M470 300h76" stroke="#FBBC04" stroke-width="10" stroke-linecap="round"/>
+  <rect x="118" y="336" width="484" height="84" rx="24" fill="#FCE8E6"/>
+  <path d="M156 378h122" stroke="#EA4335" stroke-width="14" stroke-linecap="round"/>
+  <path d="M314 378h216" stroke="#F28B82" stroke-width="14" stroke-linecap="round"/>
+  <g fill="#fff" stroke="#DADCE0" stroke-width="2">
+    <circle cx="642" cy="386" r="48"/>
+    <circle cx="118" cy="98" r="34"/>
+  </g>
+  <path d="M626 386h32M642 370v32" stroke="#1A73E8" stroke-width="10" stroke-linecap="round"/>
+  <path d="M106 98h24M118 86v24" stroke="#34A853" stroke-width="8" stroke-linecap="round"/>
+  <text x="144" y="265" fill="#174EA6" font-family="Arial, sans-serif" font-size="22" font-weight="700">相談窓口</text>
+  <text x="444" y="174" fill="#137333" font-family="Arial, sans-serif" font-size="20" font-weight="700">Cloud</text>
+  <text x="456" y="286" fill="#B06000" font-family="Arial, sans-serif" font-size="20" font-weight="700">AI</text>
+</svg>

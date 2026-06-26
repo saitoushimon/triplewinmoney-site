@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 340" role="img" aria-labelledby="title">
+  <title id="title">Cost control</title>
+  <rect width="520" height="340" rx="34" fill="#E8F0FE"/>
+  <rect x="72" y="78" width="376" height="202" rx="28" fill="#fff" stroke="#DADCE0" stroke-width="2"/>
+  <path d="M122 226h276" stroke="#DADCE0" stroke-width="10" stroke-linecap="round"/>
+  <path d="M142 226v-58M222 226v-98M302 226v-132M382 226v-76" stroke="#1A73E8" stroke-width="24" stroke-linecap="round"/>
+  <circle cx="404" cy="92" r="34" fill="#34A853"/>
+  <path d="M390 92h28M404 78v28" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
+</svg>
