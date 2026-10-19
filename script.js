@@ -63,7 +63,7 @@ if (form && statusNode) {
       return;
     }
 
-    const recipient = form.dataset.recipient || "shimon.saitou@gmail.com";
+    const recipient = form.dataset.recipient || "info@triplewinmoney.com";
     const subject = encodeURIComponent("ITサポート無料相談");
     const body = encodeURIComponent(buildInquiryText());
     window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
@@ -75,84 +75,76 @@ if (copyButton) {
   copyButton.addEventListener("click", copyInquiry);
 }
 
-function setupScrollReveal() {
-  const revealGroups = [
-    ".hero-copy",
-    ".representative-card",
-    ".trust-band",
-    ".section-heading",
-    ".split-heading",
-    ".trouble-card",
-    ".section-cta",
-    ".service-card",
-    ".ai-card",
-    ".scope-card",
-    ".price-card",
-    ".comparison-wrap",
-    ".contract-note",
-    ".visit-card",
-    ".flow-list li",
-    ".consult-list",
-    ".case-card",
-    ".security-card",
-    ".profile-card",
-    ".faq-list details",
-    ".contact-layout"
-  ];
+const documentForm = document.getElementById("document-request-form");
+const documentStatus = document.getElementById("document-request-status");
+const documentCopyButton = document.getElementById("copy-document-request");
 
-  const targets = Array.from(document.querySelectorAll(revealGroups.join(",")));
-  targets.forEach((target, index) => {
-    target.dataset.reveal = target.matches(".representative-card, .visit-card, .security-card, .profile-card, .contact-layout") ? "scale" : "up";
-    target.style.setProperty("--reveal-delay", `${Math.min(index % 4, 3) * 80}ms`);
+function buildDocumentRequestText() {
+  if (!documentForm) return "";
+  const data = new FormData(documentForm);
+  return [
+    "トリプルウィンマネー 斉藤 様",
+    "",
+    "ITサポートサービスの提案資料を希望します。",
+    "",
+    `会社名 / 店舗名：${valueOf(data, "company") || "未入力"}`,
+    `お名前：${valueOf(data, "name")}`,
+    `資料送付先メールアドレス：${valueOf(data, "email")}`,
+    "",
+    "併せて確認したいこと：",
+    valueOf(data, "message") || "特になし"
+  ].join("\n");
+}
+
+if (documentForm && documentStatus) {
+  documentForm.addEventListener("submit", event => {
+    event.preventDefault();
+    if (!documentForm.reportValidity()) {
+      documentStatus.textContent = "お名前と資料の送付先メールアドレスをご確認ください。";
+      return;
+    }
+    const recipient = documentForm.dataset.recipient || "info@triplewinmoney.com";
+    const subject = encodeURIComponent("ITサポートサービス 資料請求");
+    const body = encodeURIComponent(buildDocumentRequestText());
+    window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+    documentStatus.textContent = "資料請求メールを作成します。メールアプリで送信を完了してください。";
   });
+}
 
-  if (reduceMotion) {
-    targets.forEach((target) => target.classList.add("is-visible"));
-    return;
-  }
+if (documentCopyButton && documentStatus) {
+  documentCopyButton.addEventListener("click", async () => {
+    try {
+      await copyText(buildDocumentRequestText());
+      documentStatus.textContent = "請求内容をコピーしました。info@triplewinmoney.comへメールでお送りください。";
+    } catch (error) {
+      documentStatus.textContent = "コピーできませんでした。入力内容を選択してコピーしてください。";
+    }
+  });
+}
 
-  document.body.classList.add("reveal-ready");
+// Icons are declared alongside their content, so reordering sections is safe.
+if (window.lucide) {
+  window.lucide.createIcons({ attrs: { 'stroke-width': 1.6, 'aria-hidden': 'true', focusable: 'false' } });
+}
 
-  if (!("IntersectionObserver" in window)) {
-    targets.forEach((target) => target.classList.add("is-visible"));
-    return;
-  }
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
+// The headline and contact form stay visible immediately; only supporting sections reveal.
+if (!reduceMotion && 'IntersectionObserver' in window) {
+  const targets = document.querySelectorAll('.service-columns article, .case-feature, .product-card, .process-list li, .profile');
+  targets.forEach(target => target.setAttribute('data-reveal', ''));
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
       if (!entry.isIntersecting) return;
-      entry.target.classList.add("is-visible");
+      entry.target.classList.add('is-visible');
       observer.unobserve(entry.target);
     });
-  }, {
-    rootMargin: "0px 0px -12% 0px",
-    threshold: 0.12
-  });
-
-  targets.forEach((target) => observer.observe(target));
+  }, { threshold: 0.05 });
+  document.body.classList.add('reveal-ready');
+  targets.forEach(target => observer.observe(target));
 }
 
-function setupScrollProgress() {
-  const header = document.querySelector(".site-header");
-
-  let ticking = false;
-
-  function updateProgress() {
-    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = maxScroll > 0 ? (window.scrollY / maxScroll) * 100 : 0;
-    document.body.style.setProperty("--scroll-progress", `${Math.min(progress, 100)}%`);
-    if (header) header.classList.toggle("is-scrolled", window.scrollY > 16);
-    ticking = false;
-  }
-
-  window.addEventListener("scroll", () => {
-    if (ticking) return;
-    ticking = true;
-    window.requestAnimationFrame(updateProgress);
-  }, { passive: true });
-
-  updateProgress();
+const header = document.querySelector('.site-header');
+function updateHeader() {
+  header?.classList.toggle('is-scrolled', window.scrollY > 16);
 }
-
-setupScrollReveal();
-setupScrollProgress();
+window.addEventListener('scroll', updateHeader, { passive: true });
+updateHeader();

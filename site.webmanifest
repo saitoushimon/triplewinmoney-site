@@ -1,15 +1,15 @@
 {
-  "name": "株式会社ミルズ",
-  "short_name": "ミルズ",
+  "name": "トリプルウィンマネー ITサポート",
+  "short_name": "トリプルウィン",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#f5f8fb",
-  "theme_color": "#0b78d7",
+  "background_color": "#f6f5f2",
+  "theme_color": "#f6f5f2",
   "icons": [
     {
-      "src": "/assets/favicon.svg",
+      "src": "/assets/logo-2026-gold.png",
       "sizes": "any",
-      "type": "image/svg+xml"
+      "type": "image/png"
     }
   ]
 }
