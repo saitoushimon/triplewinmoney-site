@@ -3,6 +3,54 @@ const statusNode = document.getElementById("form-status");
 const copyButton = document.getElementById("copy-inquiry");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+function initTypewriter() {
+  const title = document.getElementById("hero-title");
+  if (!title || reduceMotion || document.hidden) return;
+
+  const characters = [];
+  title.querySelectorAll(".typewriter-phrase").forEach(phrase => {
+    const letters = Array.from(phrase.textContent, letter => {
+      const character = document.createElement("span");
+      character.className = "typewriter-char";
+      character.textContent = letter;
+      characters.push(character);
+      return character;
+    });
+    phrase.replaceChildren(...letters);
+  });
+  if (!characters.length) return;
+
+  // Keep the full headline in the layout while revealing one character at a time.
+  title.classList.add("is-typing");
+  let index = 0;
+  let timer;
+  const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const finish = () => {
+    window.clearTimeout(timer);
+    title.classList.remove("is-typing");
+    characters.forEach(character => character.classList.remove("is-cursor"));
+    document.removeEventListener("visibilitychange", onVisibilityChange);
+    motionPreference.removeEventListener("change", onMotionChange);
+  };
+  const onVisibilityChange = () => {
+    if (document.hidden) finish();
+  };
+  const onMotionChange = event => {
+    if (event.matches) finish();
+  };
+  const typeNext = () => {
+    characters[index - 1]?.classList.remove("is-cursor");
+    characters[index].classList.add("is-revealed", "is-cursor");
+    index += 1;
+    timer = window.setTimeout(index < characters.length ? typeNext : finish, index < characters.length ? 65 : 350);
+  };
+  document.addEventListener("visibilitychange", onVisibilityChange);
+  motionPreference.addEventListener("change", onMotionChange);
+  timer = window.setTimeout(typeNext, 120);
+}
+
+initTypewriter();
+
 function valueOf(formData, key) {
   return String(formData.get(key) || "").trim();
 }
@@ -127,7 +175,7 @@ if (window.lucide) {
   window.lucide.createIcons({ attrs: { 'stroke-width': 1.6, 'aria-hidden': 'true', focusable: 'false' } });
 }
 
-// The headline and contact form stay visible immediately; only supporting sections reveal.
+// Supporting sections reveal on scroll; the headline uses its own typing effect.
 if (!reduceMotion && 'IntersectionObserver' in window) {
   const targets = document.querySelectorAll('.service-columns article, .case-feature, .product-card, .process-list li, .profile');
   targets.forEach(target => target.setAttribute('data-reveal', ''));

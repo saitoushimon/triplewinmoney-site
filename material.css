@@ -52,6 +52,12 @@ h1, h2, h3, h4 { line-break: strict; word-break: normal; text-wrap: balance; }
 .eyebrow { margin-bottom: 22px; font-size: 22px; font-weight: 700; letter-spacing: .03em; }
 .hero h1 { font-size: clamp(46px, 6.4vw, 86px); line-height: 1.24; letter-spacing: -.065em; margin-bottom: 28px; }
 .hero h1 span { display: inline-block; }
+.hero h1 .typewriter-line { display: inline; }
+.hero h1 .typewriter-phrase { white-space: nowrap; }
+.typewriter-char { position: relative; }
+.typewriter.is-typing .typewriter-char { opacity: 0; }
+.typewriter.is-typing .typewriter-char.is-revealed { opacity: 1; }
+.typewriter-char.is-cursor::after { content: ""; position: absolute; right: -.08em; top: .12em; height: .9em; border-right: 2px solid currentColor; }
 .hero-description { margin: 0 auto 32px; font-size: clamp(18px, 1.9vw, 23px); line-height: 1.9; padding-inline: 20px; }
 .hero-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; }
 .hero-note { font-size: 15px; color: var(--muted); margin-top: 20px; }
@@ -329,6 +335,7 @@ details p { margin: 20px 0 0; color: var(--muted); }
   .header-cta { font-size: 13px; min-height: 44px; padding: 10px 14px; }
   .hero { padding-top: 50px; }
   .hero h1 { font-size: clamp(36px, 7.7vw, 60px); letter-spacing: -.06em; }
+  .hero h1 .typewriter-line:last-of-type { font-size: clamp(25px, 7.2vw, 56px); }
   .hero .eyebrow { font-size: 16px; padding-inline: 16px; }
   .hero-description { font-size: 18px; max-width: 30em; }
   .hero-description br { display: block; }
@@ -437,4 +444,6 @@ details p { margin: 20px 0 0; color: var(--muted); }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; animation: none !important; }
   .reveal-ready [data-reveal] { opacity: 1; transform: none; }
+  .typewriter.is-typing .typewriter-char { opacity: 1; }
+  .typewriter-char.is-cursor::after { display: none; }
 }
