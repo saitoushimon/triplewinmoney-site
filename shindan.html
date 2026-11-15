@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>3分でわかる IT健康診断 | トリプルウィンマネー</title>
+  <meta name="description" content="10問に答えるだけで、御社の「ITのお金のムダ」と「情報セキュリティの危険度」がその場でわかります。">
+  <link rel="canonical" href="https://triplewinmoney.com/shindan.html">
+  <link rel="icon" href="./assets/logo-2026-gold.png" type="image/png">
+  <link rel="stylesheet" href="./material.css">
+  <link rel="stylesheet" href="./shindan.css">
+  <script defer src="./shindan-config.js"></script>
+  <script defer src="./shindan.js"></script>
+</head>
+<body class="diagnosis">
+  <header class="site-header">
+    <a class="brand" href="./"><img src="./assets/logo-2026-gold.png" alt="" width="46" height="46"><span>TRIPLE WIN MONEY<small>中小企業・店舗向けITサポート</small></span></a>
+  </header>
+  <main class="diagnosis-main">
+    <section id="start-screen" class="diagnosis-panel" aria-labelledby="start-title">
+      <h1 id="start-title" tabindex="-1">3分でわかる <span class="phrase">IT健康診断</span></h1>
+      <p>10問に答えるだけで、御社の「ITのお金のムダ」と「情報セキュリティの危険度」がその場でわかります。</p>
+      <button type="button" id="start-button" class="button button-primary" disabled hidden></button>
+      <ul class="diagnosis-notes">
+        <li>回答はこの端末の中だけで計算され、外部には送信されません</li>
+        <li>本診断は簡易的な自己チェックです。専門的なセキュリティ診断(脆弱性診断)ではありません</li>
+      </ul>
+      <noscript><p>診断を受けるには、ブラウザの JavaScript を有効にしてください。</p></noscript>
+    </section>
+
+    <section id="question-screen" class="diagnosis-panel" aria-labelledby="question-title" hidden>
+      <div class="diagnosis-progress">
+        <span id="question-count" class="diagnosis-count" aria-hidden="true"></span>
+        <progress id="question-progress" aria-label="診断の進捗"></progress>
+      </div>
+      <h2 id="question-title" tabindex="-1"></h2>
+      <div id="question-choices" class="diagnosis-choices"></div>
+      <button type="button" id="back-button" class="button button-outline"></button>
+    </section>
+
+    <section id="result-screen" class="diagnosis-panel" aria-labelledby="result-title" hidden>
+      <h2 id="result-title" tabindex="-1"></h2>
+      <div id="result-axes" class="diagnosis-results"></div>
+      <div class="diagnosis-actions">
+        <button type="button" id="contact-button" class="button button-primary" aria-controls="diagnosis-contact" aria-expanded="false"></button>
+      </div>
+      <section id="diagnosis-contact" class="diagnosis-contact" aria-labelledby="diagnosis-contact-title" hidden>
+        <h3 id="diagnosis-contact-title" tabindex="-1"></h3>
+        <form id="diagnosis-form" method="post" novalidate hidden>
+          <div id="diagnosis-fields" class="diagnosis-fields"></div>
+          <p id="diagnosis-privacy" class="diagnosis-notes"></p>
+          <button type="submit" id="diagnosis-submit" class="button button-dark" disabled></button>
+        </form>
+        <section id="draft-screen" aria-labelledby="draft-title" hidden>
+          <h4 id="draft-title" tabindex="-1"></h4>
+          <p id="diagnosis-error" class="diagnosis-error" role="alert" hidden></p>
+          <p id="draft-instructions"></p>
+          <p id="draft-recipient"></p>
+          <label for="draft-copy" id="draft-label"></label>
+          <textarea id="draft-copy" rows="5" readonly></textarea>
+          <div class="diagnosis-draft-actions">
+            <button type="button" id="draft-copy-button" class="button button-outline"></button>
+            <button type="button" id="draft-edit-button" class="button button-outline"></button>
+          </div>
+          <p id="draft-status" class="diagnosis-notes" role="status"></p>
+        </section>
+      </section>
+      <footer id="result-notes" class="diagnosis-notes diagnosis-result-notes"></footer>
+    </section>
+  </main>
+</body>
+</html>
